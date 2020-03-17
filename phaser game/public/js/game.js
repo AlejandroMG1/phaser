@@ -1,3 +1,5 @@
+var contPlayer = 0;
+
 var config = {
   type: Phaser.AUTO,
   parent: 'phaser-example',
@@ -20,13 +22,14 @@ var config = {
 var game = new Phaser.Game(config);
 
 function preload() {
-  this.load.image('ship', 'assets/spaceShips_001.png');
+  this.load.image('ship', 'assets/spaceSjips_001.jpg');
   this.load.image('otherPlayer', 'assets/enemyBlack5.png');
-  this.load.image('star', 'assets/star_gold.png');
+  this.load.image('star', 'assets/COLSA2.png');
 }
 
 function addPlayer(self, playerInfo) {
-  self.ship = self.physics.add.image(playerInfo.x, playerInfo.y, 'ship').setOrigin(0.5, 0.5).setDisplaySize(53, 40);
+  contPlayer++;
+  self.ship = self.physics.add.image(playerInfo.x, playerInfo.y, 'ship').setOrigin(0.5, 0.5).setDisplaySize(100, 70);
   if (playerInfo.team === 'blue') {
     self.ship.setTint(0x0000ff);
   } else {
@@ -38,7 +41,7 @@ function addPlayer(self, playerInfo) {
 }
 
 function create() {
-  game.world.setBounds()
+  //game.world.setBounds()
   this.cursors = this.input.keyboard.createCursorKeys();
   var self = this;
   this.socket = io();
