@@ -22,18 +22,21 @@ var config = {
 var game = new Phaser.Game(config);
 
 function preload() {
-  this.load.image('ship', 'assets/spaceSjips_001.jpg');
+  this.load.image('ship', 'assets/spaceShips_001.png');
   this.load.image('otherPlayer', 'assets/enemyBlack5.png');
+  this.load.image('pBlue', 'assets/BluePj.png');
+  this.load.image('pRed', 'assets/RedPj.png');
+  this.load.image('otherPlayerBlue', 'assets/OtherBlue.png');
+  this.load.image('otherPlayerRed', 'assets/OtherRed.png');
   this.load.image('star', 'assets/COLSA2.png');
 }
 
 function addPlayer(self, playerInfo) {
   contPlayer++;
-  self.ship = self.physics.add.image(playerInfo.x, playerInfo.y, 'ship').setOrigin(0.5, 0.5).setDisplaySize(100, 70);
   if (playerInfo.team === 'blue') {
-    self.ship.setTint(0x0000ff);
+    self.ship = self.physics.add.image(playerInfo.x, playerInfo.y, 'pBlue').setOrigin(0.5, 0.5).setDisplaySize(90, 65);
   } else {
-    self.ship.setTint(0xff0000);
+    self.ship = self.physics.add.image(playerInfo.x, playerInfo.y, 'pRed').setOrigin(0.5, 0.5).setDisplaySize(90, 65);
   }
   self.ship.setDrag(100);
   self.ship.setAngularDrag(100);
@@ -99,11 +102,11 @@ function create() {
 }
 
 function addOtherPlayers(self, playerInfo) {
-  const otherPlayer = self.add.sprite(playerInfo.x, playerInfo.y, 'otherPlayer').setOrigin(0.5, 0.5).setDisplaySize(53, 40);
+  var otherPlayer=self.add.sprite(playerInfo.x, playerInfo.y)
   if (playerInfo.team === 'blue') {
-    otherPlayer.setTint(0x0000ff);
+    otherPlayer = self.add.sprite(playerInfo.x, playerInfo.y, 'otherPlayerBlue').setOrigin(0.5, 0.5).setDisplaySize(90, 65);
   } else {
-    otherPlayer.setTint(0xff0000);
+    otherPlayer = self.add.sprite(playerInfo.x, playerInfo.y, 'otherPlayerRed').setOrigin(0.5, 0.5).setDisplaySize(90, 65);
   }
   otherPlayer.playerId = playerInfo.playerId;
   self.otherPlayers.add(otherPlayer);
